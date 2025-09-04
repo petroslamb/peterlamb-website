@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,17 +8,42 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
+        darkMode: 'class',
         theme: {
           extend: {
             colors: {
-              'primary': '#1e3a8a', // A deep, professional blue
-              'primary-hover': '#1e40af',
-              'secondary': '#f3f4f6', // Light gray for backgrounds
-              'text-primary': '#111827',
-              'text-secondary': '#4b5563',
+              'primary': '#0e7490', // cyan-700
+              'primary-hover': '#065f74', // cyan-800
+              'secondary': '#f1f5f9', // slate-100
+              'text-primary': '#1e293b', // slate-800
+              'text-secondary': '#64748b', // slate-500
             },
             fontFamily: {
               sans: ['Inter', 'sans-serif'],
+            },
+            animation: {
+              'fade-in-up': 'fade-in-up 0.6s ease-out forwards',
+              'fade-in': 'fade-in 0.4s ease-out forwards',
+            },
+            keyframes: {
+              'fade-in-up': {
+                '0%': {
+                  opacity: '0',
+                  transform: 'translateY(20px)'
+                },
+                '100%': {
+                  opacity: '1',
+                  transform: 'translateY(0)'
+                },
+              },
+              'fade-in': {
+                '0%': {
+                  opacity: '0'
+                },
+                '100%': {
+                  opacity: '1'
+                },
+              },
             },
           },
         },
@@ -39,7 +63,7 @@
 }
 </script>
 </head>
-  <body class="bg-white font-sans text-text-primary">
+  <body class="bg-secondary dark:bg-slate-900 font-sans text-text-primary transition-colors duration-300">
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>

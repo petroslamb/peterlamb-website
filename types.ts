@@ -24,6 +24,8 @@ export interface Content {
     intro: string;
     experienceTitle: string;
     experience: string[];
+    skillsTitle: string;
+    skills: SkillCategory[];
     educationTitle: string;
     education: string[];
     languagesTitle: string;
@@ -44,6 +46,7 @@ export interface Content {
   contact: {
     title:string;
     intro: string;
+    detailsTitle: string;
     email: string;
     linkedin: string;
     github: string;
@@ -60,6 +63,12 @@ export interface Content {
   announcements: {
     languageChanged: string;
   };
+  ariaLabels: {
+    mainNav: string;
+    socialNav: string;
+    switchToEnglish: string;
+    switchToGreek: string;
+  };
 }
 
 export interface Service {
@@ -68,6 +77,11 @@ export interface Service {
 }
 
 export interface ServiceCategory {
+  title: string;
+  items: string[];
+}
+
+export interface SkillCategory {
   title: string;
   items: string[];
 }

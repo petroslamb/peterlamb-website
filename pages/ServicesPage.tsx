@@ -2,38 +2,48 @@ import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { ServiceCategory } from '../types';
 
-const ServiceCategoryCard: React.FC<{ category: ServiceCategory }> = ({ category }) => (
-    <div className="bg-white p-6 rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold text-primary mb-4">{category.title}</h2>
-        <ul className="space-y-3 text-text-secondary">
+const ServiceCategoryCard: React.FC<{ category: ServiceCategory, icon: React.ReactNode }> = ({ category, icon }) => (
+    <li className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-md">
+        <div className="flex items-center justify-center h-12 w-12 rounded-full bg-cyan-100 dark:bg-cyan-900/50 text-primary dark:text-cyan-400 mb-4">
+            {icon}
+        </div>
+        <h2 className="text-2xl font-bold text-primary dark:text-cyan-400 mb-4">{category.title}</h2>
+        <ul className="space-y-3 text-text-secondary dark:text-slate-400">
             {category.items.map((item, index) => (
                 <li key={index} className="flex items-start">
-                    <svg className="flex-shrink-0 h-5 w-5 text-green-500 mr-3 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    <svg className="flex-shrink-0 h-5 w-5 text-primary mr-3 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     <span>{item}</span>
                 </li>
             ))}
         </ul>
-    </div>
+    </li>
 );
 
 const ServicesPage: React.FC = () => {
     const { translations } = useLanguage();
     const { services } = translations;
+    
+    const icons = [
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25" /></svg>,
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.898 20.648l.21-1.423a2.25 2.25 0 00-1.887-1.887l-1.423-.21a2.25 2.25 0 00-2.43 2.43l.21 1.423a2.25 2.25 0 001.887 1.887l1.423.21a2.25 2.25 0 002.43-2.43z" /></svg>,
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375" /></svg>,
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" /></svg>
+    ];
 
     return (
         <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12">
-                <h1 className="text-3xl md:text-4xl font-bold text-text-primary">{services.title}</h1>
-                <p className="mt-4 text-lg text-text-secondary max-w-3xl mx-auto">{services.intro}</p>
+                <h1 className="text-3xl md:text-4xl font-bold text-text-primary dark:text-white">{services.title}</h1>
+                <p className="mt-4 text-lg text-text-secondary dark:text-slate-300 max-w-3xl mx-auto">{services.intro}</p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-8">
+            <ul className="grid md:grid-cols-2 gap-8">
                 {services.categories.map((category, index) => (
-                    <ServiceCategoryCard key={index} category={category} />
+                    <ServiceCategoryCard key={index} category={category} icon={icons[index]} />
                 ))}
-            </div>
+            </ul>
         </div>
     );
 };

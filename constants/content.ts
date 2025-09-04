@@ -35,6 +35,13 @@ export const content: Record<'en' | 'gr', Content> = {
         "Big data engineering & distributed systems",
         "Software product development",
       ],
+      skillsTitle: "Technical Skills",
+      skills: [
+        { title: "Languages", items: ["Python", "SQL", "JavaScript/TypeScript", "Bash"] },
+        { title: "Frameworks & Libraries", items: ["Django", "Flask", "FastAPI", "React", "PySpark", "Scikit-learn", "Pandas", "LangChain"] },
+        { title: "Tools & Platforms", items: ["Docker", "Kubernetes", "Elasticsearch", "PostgreSQL", "Git", "Jenkins", "Nginx"] },
+        { title: "Cloud & MLOps", items: ["AWS (EC2, S3, RDS)", "Google Cloud", "Terraform", "MLflow", "Airflow"] },
+      ],
       educationTitle: "Education",
       education: [
         "MSc in Computer Science (University of Edinburgh)",
@@ -69,6 +76,7 @@ export const content: Record<'en' | 'gr', Content> = {
     contact: {
       title: "Contact",
       intro: "Let’s talk about your project.",
+      detailsTitle: "Contact Details",
       email: "Email",
       linkedin: "LinkedIn",
       github: "GitHub",
@@ -84,6 +92,12 @@ export const content: Record<'en' | 'gr', Content> = {
     },
     announcements: {
       languageChanged: "Language set to English",
+    },
+    ariaLabels: {
+      mainNav: "Main navigation",
+      socialNav: "Social media links",
+      switchToEnglish: "Switch to English",
+      switchToGreek: "Switch to Greek",
     }
   },
   gr: {
@@ -120,6 +134,13 @@ export const content: Record<'en' | 'gr', Content> = {
         "Big Data & κατανεμημένα συστήματα",
         "Ανάπτυξη προϊόντων λογισμικού",
       ],
+      skillsTitle: "Τεχνικές Δεξιότητες",
+      skills: [
+        { title: "Γλώσσες Προγραμματισμού", items: ["Python", "SQL", "JavaScript/TypeScript", "Bash"] },
+        { title: "Frameworks & Βιβλιοθήκες", items: ["Django", "Flask", "FastAPI", "React", "PySpark", "Scikit-learn", "Pandas", "LangChain"] },
+        { title: "Εργαλεία & Πλατφόρμες", items: ["Docker", "Kubernetes", "Elasticsearch", "PostgreSQL", "Git", "Jenkins", "Nginx"] },
+        { title: "Cloud & MLOps", items: ["AWS (EC2, S3, RDS)", "Google Cloud", "Terraform", "MLflow", "Airflow"] },
+      ],
       educationTitle: "Σπουδές",
       education: [
         "MSc Computer Science (University of Edinburgh)",
@@ -154,6 +175,7 @@ export const content: Record<'en' | 'gr', Content> = {
     contact: {
       title: "Επικοινωνία",
       intro: "Ας συζητήσουμε για το έργο σας.",
+      detailsTitle: "Στοιχεία Επικοινωνίας",
       email: "Email",
       linkedin: "LinkedIn",
       github: "GitHub",
@@ -169,6 +191,12 @@ export const content: Record<'en' | 'gr', Content> = {
     },
     announcements: {
       languageChanged: "Η γλώσσα άλλαξε σε Ελληνικά",
+    },
+    ariaLabels: {
+      mainNav: "Κύρια πλοήγηση",
+      socialNav: "Σύνδεσμοι κοινωνικών δικτύων",
+      switchToEnglish: "Αλλαγή στα Αγγλικά",
+      switchToGreek: "Αλλαγή στα Ελληνικά",
     },
   },
 };
