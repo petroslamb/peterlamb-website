@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Peter Lamb | Software & AI Engineering Consultant</title>
     <meta name="description" content="Personal and business website for Peter Lamb, a Python/Django and AI-focused developer and consultant." />
+    <link rel="icon" href="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3e%3ccircle cx='50' cy='50' r='50' fill='%23155e75'/%3e%3ctext x='50' y='55' font-family='Inter, sans-serif' font-size='50' fill='white' text-anchor='middle' dy='.1em' font-weight='bold'%3ePL%3c/text%3e%3c/svg%3e" type="image/svg+xml" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -12,8 +13,8 @@
         theme: {
           extend: {
             colors: {
-              'primary': '#0e7490', // cyan-700
-              'primary-hover': '#065f74', // cyan-800
+              'primary': '#155e75', // cyan-800 - WCAG AA compliant on white text
+              'primary-hover': '#164e63', // cyan-900 - WCAG AA compliant on white text
               'secondary': '#f1f5f9', // slate-100
               'text-primary': '#1e293b', // slate-800
               'text-secondary': '#64748b', // slate-500
@@ -49,6 +50,94 @@
         },
       }
     </script>
+    <style>
+      .prose h2 {
+        font-size: 1.5rem; /* text-2xl */
+        line-height: 2rem;
+        font-weight: 700; /* font-bold */
+        margin-top: 2.5rem; /* my-10 */
+        margin-bottom: 1rem; /* mb-4 */
+      }
+      .prose h3 {
+        font-size: 1.25rem; /* text-xl */
+        line-height: 1.75rem;
+        font-weight: 700;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+      }
+      .prose p {
+        margin-top: 1.25rem; /* my-5 */
+        margin-bottom: 1.25rem;
+      }
+      .prose a {
+        color: #0e7490;
+        text-decoration: underline;
+      }
+      .dark .prose a {
+        color: #22d3ee; /* cyan-400 */
+      }
+      .prose ul, .prose ol {
+        margin-top: 1.25rem;
+        margin-bottom: 1.25rem;
+        padding-left: 1.75rem;
+      }
+      .prose ul {
+        list-style-type: disc;
+      }
+      .prose ol {
+        list-style-type: decimal;
+      }
+      .prose li {
+        margin-top: 0.5rem; /* my-2 */
+        margin-bottom: 0.5rem;
+      }
+      .prose blockquote {
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        border-left-width: 4px;
+        border-color: #d1d5db; /* gray-300 */
+        padding-left: 1rem;
+        font-style: italic;
+      }
+      .dark .prose blockquote {
+        border-color: #4b5563; /* gray-600 */
+      }
+      .prose code:not(pre > code) {
+        background-color: #f1f5f9; /* slate-100 */
+        padding: 0.2rem 0.4rem;
+        border-radius: 0.25rem;
+        font-family: monospace;
+        font-size: 0.875rem;
+      }
+      .dark .prose code:not(pre > code) {
+        background-color: #334155; /* slate-700 */
+      }
+      .prose pre {
+        background-color: #f1f5f9;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        overflow-x: auto;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+      .dark .prose pre {
+        background-color: #1e293b; /* slate-800 */
+      }
+      .prose pre code {
+        background-color: transparent;
+        padding: 0;
+      }
+      .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        will-change: opacity, transform;
+      }
+      .animate-on-scroll.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
@@ -65,6 +154,8 @@
 </head>
   <body class="bg-secondary dark:bg-slate-900 font-sans text-text-primary transition-colors duration-300">
     <div id="root"></div>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
     <script type="module" src="/index.tsx"></script>
   </body>
 </html>

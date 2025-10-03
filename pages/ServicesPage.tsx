@@ -1,29 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
-import { ServiceCategory } from '../types';
-
-const ServiceCategoryCard: React.FC<{ category: ServiceCategory, icon: React.ReactNode }> = ({ category, icon }) => (
-    <li className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-md">
-        <div className="flex items-center justify-center h-12 w-12 rounded-full bg-cyan-100 dark:bg-cyan-900/50 text-primary dark:text-cyan-400 mb-4">
-            {icon}
-        </div>
-        <h2 className="text-2xl font-bold text-primary dark:text-cyan-400 mb-4">{category.title}</h2>
-        <ul className="space-y-3 text-text-secondary dark:text-slate-400">
-            {category.items.map((item, index) => (
-                <li key={index} className="flex items-start">
-                    <svg className="flex-shrink-0 h-5 w-5 text-primary mr-3 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" aria-hidden="true">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span>{item}</span>
-                </li>
-            ))}
-        </ul>
-    </li>
-);
+import AnimatedSection from '../components/AnimatedSection';
+import MetaTags from '../components/MetaTags';
 
 const ServicesPage: React.FC = () => {
-    const { translations } = useLanguage();
+    const { language, translations } = useLanguage();
     const { services } = translations;
+
+    const metaDescription = language === 'en'
+      ? `Explore the software and AI consulting services offered by Peter Lamb, including Software Engineering, AI & Machine Learning, Big Data & Analytics, and technical support.`
+      : `Εξερευνήστε τις συμβουλευτικές υπηρεσίες λογισμικού και AI που προσφέρει ο Peter Lamb, συμπεριλαμβανομένων των Software Engineering, AI & Machine Learning, Big Data & Analytics, και τεχνικής υποστήριξης.`;
     
     const icons = [
         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25" /></svg>,
@@ -34,6 +21,10 @@ const ServicesPage: React.FC = () => {
 
     return (
         <div className="max-w-7xl mx-auto">
+            <MetaTags 
+                title={`${services.title} | Peter Lamb`} 
+                description={metaDescription}
+            />
             <div className="text-center mb-12">
                 <h1 className="text-3xl md:text-4xl font-bold text-text-primary dark:text-white">{services.title}</h1>
                 <p className="mt-4 text-lg text-text-secondary dark:text-slate-300 max-w-3xl mx-auto">{services.intro}</p>
@@ -41,7 +32,33 @@ const ServicesPage: React.FC = () => {
 
             <ul className="grid md:grid-cols-2 gap-8">
                 {services.categories.map((category, index) => (
-                    <ServiceCategoryCard key={index} category={category} icon={icons[index]} />
+                    <AnimatedSection as="li" key={index} delay={index * 150}>
+                       <Link 
+                         to={`/services/${category.slug}`}
+                         className="h-full block bg-white dark:bg-slate-800 rounded-lg shadow-md hover:shadow-xl focus:shadow-xl hover:-translate-y-1 focus:-translate-y-1 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary dark:focus-visible:ring-offset-slate-900"
+                       >
+                           <div className="p-6 flex flex-col h-full">
+                                <div className="flex items-center justify-center h-12 w-12 rounded-full bg-cyan-100 dark:bg-cyan-900/50 text-primary dark:text-cyan-400 mb-4">
+                                    {icons[index]}
+                                </div>
+                                <h2 className="text-2xl font-bold text-primary dark:text-cyan-400 mb-4">{category.title}</h2>
+                                <ul className="space-y-3 text-text-secondary dark:text-slate-400 flex-grow">
+                                    {category.items.map((item, itemIndex) => (
+                                        <li key={itemIndex} className="flex items-start">
+                                            <svg className="flex-shrink-0 h-5 w-5 text-primary mr-3 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" aria-hidden="true">
+                                              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                            <span>{item}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                                <div className="mt-6 text-primary dark:text-cyan-400 font-bold inline-flex items-center">
+                                    {services.readCaseStudies}
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+                                </div>
+                           </div>
+                       </Link>
+                    </AnimatedSection>
                 ))}
             </ul>
         </div>

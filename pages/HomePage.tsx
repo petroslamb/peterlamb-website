@@ -2,20 +2,25 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { Service } from '../types';
+import MetaTags from '../components/MetaTags';
 
 const ServiceCard: React.FC<{ service: Service, icon: React.ReactNode }> = ({ service, icon }) => (
-    <div className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+    <div className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-md h-full flex flex-col">
         <div className="flex items-center justify-center h-12 w-12 rounded-full bg-cyan-100 dark:bg-cyan-900/50 text-primary dark:text-cyan-400 mb-4">
             {icon}
         </div>
         <h3 className="text-lg font-bold text-text-primary dark:text-slate-100 mb-2">{service.title}</h3>
-        <p className="text-text-secondary dark:text-slate-400">{service.description}</p>
+        <p className="text-text-secondary dark:text-slate-400 flex-grow">{service.description}</p>
     </div>
 );
 
 const HomePage: React.FC = () => {
-    const { translations } = useLanguage();
+    const { language, translations } = useLanguage();
     const { home } = translations;
+
+    const metaDescription = language === 'en'
+      ? `Peter Lamb is a Software & AI Engineering Consultant specializing in Python, AI/ML, and big data. Helping businesses design, build, and scale reliable software solutions.`
+      : `Ο Peter Lamb είναι Σύμβουλος Μηχανικής Λογισμικού & Τεχνητής Νοημοσύνης με εξειδίκευση σε Python, AI/ML και big data. Βοηθά επιχειρήσεις να σχεδιάσουν και να αναπτύξουν αξιόπιστες λύσεις.`;
 
     const icons = [
         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25" /></svg>,
@@ -26,6 +31,10 @@ const HomePage: React.FC = () => {
 
     return (
         <div className="space-y-16">
+            <MetaTags 
+                title={`${home.name} | ${home.title}`} 
+                description={metaDescription}
+            />
             <section className="text-center -mx-4 sm:-mx-6 lg:-mx-8 -mt-8 md:-mt-12 py-20 md:py-28 bg-gradient-to-b from-white to-secondary dark:from-slate-900 dark:to-slate-800 overflow-hidden">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                     <h1 
@@ -67,7 +76,14 @@ const HomePage: React.FC = () => {
                 <h2 id="services-snapshot-heading" className="text-3xl font-bold text-center text-text-primary dark:text-white mb-12">{home.servicesTitle}</h2>
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {home.services.map((service, index) => (
-                        <ServiceCard key={index} service={service} icon={icons[index]} />
+                        <Link 
+                            to={`/services/${service.slug}`} 
+                            key={index} 
+                            className="block h-full rounded-lg hover:shadow-xl focus:shadow-xl transform hover:-translate-y-1 focus:-translate-y-1 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary dark:focus-visible:ring-offset-slate-900"
+                            aria-label={`Learn more about ${service.title}`}
+                        >
+                            <ServiceCard service={service} icon={icons[index]} />
+                        </Link>
                     ))}
                 </div>
             </section>

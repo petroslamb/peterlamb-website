@@ -1,9 +1,14 @@
 import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import MetaTags from '../components/MetaTags';
 
 const ContactPage: React.FC = () => {
-    const { translations } = useLanguage();
+    const { language, translations } = useLanguage();
     const { contact } = translations;
+
+    const metaDescription = language === 'en'
+      ? `Get in touch with Peter Lamb to discuss your software or AI project. Find contact details and a direct message form.`
+      : `Επικοινωνήστε με τον Peter Lamb για να συζητήσετε το έργο λογισμικού ή AI σας. Βρείτε στοιχεία επικοινωνίας και μια φόρμα άμεσου μηνύματος.`;
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -17,6 +22,10 @@ const ContactPage: React.FC = () => {
 
     return (
         <div className="max-w-4xl mx-auto">
+             <MetaTags 
+                title={`${contact.title} | Peter Lamb`} 
+                description={metaDescription}
+            />
             <div className="text-center mb-12">
                 <h1 className="text-3xl md:text-4xl font-bold text-text-primary dark:text-white">{contact.title}</h1>
                 <p className="mt-4 text-lg text-text-secondary dark:text-slate-300">{contact.intro}</p>
